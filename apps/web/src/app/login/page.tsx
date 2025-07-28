@@ -1,8 +1,9 @@
+import { LoginForm } from "@/components/login-form";
 import { globalGETRateLimit } from "@/lib/server/request";
 import { getCurrentSession } from "@/lib/server/session";
 import { redirect } from "next/navigation";
 
-export default async function LoginPage() {
+export default async function Page() {
   if (!(await globalGETRateLimit())) {
     return "Too many requests";
   }
@@ -13,9 +14,10 @@ export default async function LoginPage() {
   }
 
   return (
-    <>
-      <h1>Sign in</h1>
-      <a href="/login/google">Sign in with Google</a>
-    </>
+    <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
+      <div className="w-full max-w-sm">
+        <LoginForm />
+      </div>
+    </div>
   );
 }
