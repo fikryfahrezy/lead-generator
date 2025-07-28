@@ -10,7 +10,7 @@ WORKDIR /app
 COPY pnpm-workspace.yaml ./
 COPY package*json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 COPY ./apps/web/package*json ./apps/web/tsconfig.json ./apps/web/
-COPY ./packages/ ./packages/
+COPY ./packages ./packages/
 
 RUN pnpm install --frozen-lockfile
 
