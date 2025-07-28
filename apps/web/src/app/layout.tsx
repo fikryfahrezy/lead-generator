@@ -28,7 +28,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <nav className="p-6 border-b-2 flex items-center justify-end">
+        <nav className="flex items-center justify-end border-b-2 p-6">
           <LogoutButton />
         </nav>
         <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
