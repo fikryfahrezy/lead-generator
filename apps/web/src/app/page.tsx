@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { globalGETRateLimit } from "@/lib/server/request";
 import { getCurrentSession } from "@/lib/server/session";
+import { leadCount } from "@aksel/db";
 import { redirect } from "next/navigation";
 
 export default async function Page() {
@@ -24,16 +25,20 @@ export default async function Page() {
     return redirect("/login");
   }
 
+  const leadCounter = await leadCount();
+
   return (
     <main>
       <Dialog>
         <form>
           <DialogTrigger asChild>
-            <Button variant="outline">Enrich new Lead</Button>
+            <Button variant="outline">
+              Enrich new Lead {String(leadCounter)}
+            </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
-              <DialogTitle>Enrich new Lead</DialogTitle>
+              <DialogTitle>Enrich new Lead </DialogTitle>
               <DialogDescription>
                 Enrich lead for domain or company name.
               </DialogDescription>

@@ -8,12 +8,13 @@ FROM base AS installer
 WORKDIR /app
  
 COPY pnpm-workspace.yaml ./
-COPY ./apps/cron/package*json ./apps/cron/tsconfig.json ./apps/cron/
 COPY package*json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
+COPY ./apps/cron/package*json ./apps/cron/tsconfig.json ./apps/cron/
+COPY ./packages/ ./packages/
 
 RUN pnpm install --frozen-lockfile
 
-COPY ./apps/cron ./apps/cron/
+COPY . .
 RUN npm run cron:build
 
 FROM base AS runner

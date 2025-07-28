@@ -1,9 +1,11 @@
+import { leadCount } from "@aksel/db";
 import { CronJob } from "cron";
 
 const CRONTAB = process.env.CRONTAB;
 
 async function runProcess() {
-  console.log("echo");
+  const leadCounter = await leadCount();
+  console.log("echo", leadCounter);
 }
 
 if (!CRONTAB) {

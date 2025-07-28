@@ -11,6 +11,7 @@
     "format": "npm run cron:format && npm run web:format",
     "lint": "npm run cron:lint && npm run web:lint",
     "ts:check": "npm run cron:ts:check && pnpm run web:ts:check",
+    "migrate:up": "cd packages/db && npm run migrate:up",
     "cron:build": "cd apps/cron && npm run build",
     "cron:dev": "cd apps/cron && npm run dev",
     "cron:lint": "cd apps/cron && npm run lint",

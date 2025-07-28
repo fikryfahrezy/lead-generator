@@ -8,12 +8,13 @@ FROM base AS installer
 WORKDIR /app
  
 COPY pnpm-workspace.yaml ./
-COPY ./apps/web/package*json ./apps/web/tsconfig.json ./apps/web/
 COPY package*json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
+COPY ./apps/web/package*json ./apps/web/tsconfig.json ./apps/web/
+COPY ./packages/ ./packages/
 
 RUN pnpm install --frozen-lockfile
 
-COPY ./apps/web ./apps/web/
+COPY . .
 RUN npm run web:build
 
 FROM base AS runner
