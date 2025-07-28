@@ -11,20 +11,9 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import { globalGETRateLimit } from "@/lib/server/request";
-import { getCurrentSession } from "@/lib/server/session";
 import { leadCount } from "@aksel/db";
-import { redirect } from "next/navigation";
 
-export default async function Page() {
-  if (!(await globalGETRateLimit())) {
-    return "Too many requests";
-  }
-  const session = await getCurrentSession();
-  if (session === null) {
-    return redirect("/login");
-  }
-
+export default async function HomePage() {
   const leadCounter = await leadCount();
 
   return (

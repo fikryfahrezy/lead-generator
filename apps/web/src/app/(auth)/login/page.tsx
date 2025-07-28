@@ -6,20 +6,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { globalGETRateLimit } from "@/lib/server/request";
-import { getCurrentSession } from "@/lib/server/session";
-import { redirect } from "next/navigation";
 
-export default async function Page() {
-  if (!(await globalGETRateLimit())) {
-    return "Too many requests";
-  }
-
-  const session = await getCurrentSession();
-  if (session !== null) {
-    return redirect("/");
-  }
-
+export default async function LoginPage() {
   return (
     <main className="w-full max-w-sm">
       <Card>
@@ -31,7 +19,7 @@ export default async function Page() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form method="GET" action="/login/google">
+          <form method="GET" action="/api/login/google">
             <Button variant="outline" className="w-full">
               Login with Google
             </Button>
