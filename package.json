@@ -1,28 +1,39 @@
 {
   "name": "akselerasi-ai-test",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "private": true,
-  "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+  "engines": {
+    "node": ">=22",
+    "npm": ">=10",
+    "pnpm": ">=10"
   },
-  "dependencies": {
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "next": "15.4.4"
+  "scripts": {
+    "lint": "npm run cron:lint && npm run web:lint",
+    "ts:check": "npm run cron:ts:check && pnpm run web:ts:check",
+    "cron:build": "cd apps/cron && npm run build",
+    "cron:dev": "cd apps/cron && npm run dev",
+    "cron:lint": "cd apps/cron && npm run lint",
+    "cron:format": "cd apps/cron && npm run format",
+    "cron:ts:check": "cd apps/cron && npm run ts:check",
+    "web:build": "cd apps/web && npm run build",
+    "web:dev": "cd apps/web && npm run dev",
+    "web:lint": "cd apps/web && npm run lint",
+    "web:format": "cd apps/web && npm run format",
+    "web:ts:check": "cd apps/web && npm run ts:check",
+    "prepare": "husky"
   },
   "devDependencies": {
-    "typescript": "^5",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4",
-    "eslint": "^9",
+    "@eslint/eslintrc": "3.3.1",
+    "@eslint/js": "9.32.0",
+    "@types/node": "22.13.14",
+    "eslint": "9.32.0",
     "eslint-config-next": "15.4.4",
-    "@eslint/eslintrc": "^3"
+    "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-prettier": "5.5.3",
+    "husky": "9.1.7",
+    "lint-staged": "16.1.2",
+    "prettier": "3.6.2",
+    "typescript": "5.8.3"
   },
   "packageManager": "pnpm@10.11.1+sha512.e519b9f7639869dc8d5c3c5dfef73b3f091094b0a006d7317353c72b124e80e1afd429732e28705ad6bfa1ee879c1fce46c128ccebd3192101f43dd67c667912"
 }

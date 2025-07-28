@@ -1,0 +1,19 @@
+{
+  "name": "cron",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch --env-file=./.env ./src/index.ts",
+    "lint": "eslint ./src/**/*",
+    "format": "prettier . --write",
+    "ts:check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "cron": "4.3.2"
+  },
+  "devDependencies": {
+    "typescript-eslint": "8.38.0"
+  }
+}
