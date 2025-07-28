@@ -5,7 +5,7 @@ const CRONTAB = process.env.CRONTAB;
 
 async function runProcess() {
   const leadCounter = await leadCount();
-  console.log("echo", leadCounter);
+  console.log("echo", leadCounter.data);
 }
 
 if (!CRONTAB) {
