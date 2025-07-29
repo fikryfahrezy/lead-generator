@@ -7,17 +7,53 @@ export {
 
 export const MAX_UPDATE_RETRY = 3;
 
+export class QueryError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "QueryError";
+    this.message = message;
+  }
+}
+
 export type OperationResult<TData> =
   | {
       success: true;
       data: TData;
     }
   | {
-      // In real world app, maybe consider also return class that extends `Error` class
-      // to inform what error that actually happens
       success: false;
+      error: Error;
       data: null;
     };
+
+async function runQuery<
+  TCallback extends () => Promise<unknown>,
+  TReturn extends Awaited<ReturnType<TCallback>>,
+>(callback: TCallback): Promise<OperationResult<TReturn>> {
+  try {
+    const callbackResult = await callback();
+
+    return {
+      success: true,
+      data: callbackResult as TReturn,
+    };
+  } catch (error) {
+    // It's better to handle each error type properly in real world app
+    if (error instanceof Error) {
+      return {
+        success: false,
+        error: new QueryError(error.message),
+        data: null,
+      };
+    }
+
+    return {
+      success: false,
+      error: new QueryError(`Unhandled error: ${String(error)}`),
+      data: null,
+    };
+  }
+}
 
 export type CreateLeadIn = {
   keyword: string;
@@ -26,7 +62,7 @@ export type CreateLeadIn = {
 export async function createLead(
   input: CreateLeadIn,
 ): Promise<OperationResult<Lead>> {
-  try {
+  return await runQuery(async () => {
     const newLead = await prisma.lead.create({
       data: {
         keyword: input.keyword,
@@ -34,16 +70,8 @@ export async function createLead(
       },
     });
 
-    return {
-      success: true,
-      data: newLead,
-    };
-  } catch {
-    return {
-      success: false,
-      data: null,
-    };
-  }
+    return newLead;
+  });
 }
 
 export type GetLeadByKeywordIn = {
@@ -53,7 +81,7 @@ export type GetLeadByKeywordIn = {
 export async function getLeadByKeyword(
   input: GetLeadByKeywordIn,
 ): Promise<OperationResult<Lead | null>> {
-  try {
+  return await runQuery(async () => {
     const lead = await prisma.lead.findFirst({
       where: {
         keyword: {
@@ -61,37 +89,19 @@ export async function getLeadByKeyword(
         },
       },
     });
-
-    return {
-      success: true,
-      data: lead,
-    };
-  } catch {
-    return {
-      success: false,
-      data: null,
-    };
-  }
+    return lead;
+  });
 }
 
 export async function getAllLeads(): Promise<OperationResult<Lead[]>> {
-  try {
+  return await runQuery(async () => {
     const leads = await prisma.lead.findMany();
-
-    return {
-      success: true,
-      data: leads,
-    };
-  } catch {
-    return {
-      success: false,
-      data: null,
-    };
-  }
+    return leads;
+  });
 }
 
 export async function getAllUnfinishLeads(): Promise<OperationResult<Lead[]>> {
-  try {
+  return await runQuery(async () => {
     const leads = await prisma.lead.findMany({
       where: {
         status: {
@@ -105,16 +115,8 @@ export async function getAllUnfinishLeads(): Promise<OperationResult<Lead[]>> {
       },
     });
 
-    return {
-      success: true,
-      data: leads,
-    };
-  } catch {
-    return {
-      success: false,
-      data: null,
-    };
-  }
+    return leads;
+  });
 }
 
 export type UpdateLeadIn = Lead;
@@ -123,22 +125,13 @@ export async function updateLead({
   id,
   ...newLeadData
 }: UpdateLeadIn): Promise<OperationResult<Lead>> {
-  try {
+  return await runQuery(async () => {
     const updatedLead = await prisma.lead.update({
       data: newLeadData,
       where: {
         id,
       },
     });
-
-    return {
-      success: true,
-      data: updatedLead,
-    };
-  } catch {
-    return {
-      success: false,
-      data: null,
-    };
-  }
+    return updatedLead;
+  });
 }
