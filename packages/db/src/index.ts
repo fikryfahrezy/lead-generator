@@ -5,6 +5,8 @@ export {
   type LeadProcessStatus,
 } from "./client";
 
+export const MAX_UPDATE_RETRY = 3;
+
 export type OperationResult<TData> =
   | {
       success: true;
@@ -94,6 +96,11 @@ export async function getAllUnfinishLeads(): Promise<OperationResult<Lead[]>> {
       where: {
         status: {
           in: [LEAD_PROCESS_STATUS.PROCESSING, LEAD_PROCESS_STATUS.PENDING],
+        },
+        AND: {
+          retry: {
+            lt: MAX_UPDATE_RETRY,
+          },
         },
       },
     });

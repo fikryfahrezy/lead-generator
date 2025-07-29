@@ -39,6 +39,8 @@ This is package used by both `web` and `cron` apps to perform opration to the da
 
 The motivation use independent package instead of setup on each apps is because all apps will access the same database. We are able to only maintain one part of project that used to all apps, intead of each apps manage database related code.
 
+This package also could treated as repository
+
 ## Development
 
 ### Setup environment variable
