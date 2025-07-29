@@ -34,7 +34,7 @@ export default async function HomePage() {
         <CardHeader>
           <AddLeadModal />
         </CardHeader>
-        <CardContent>
+        <CardContent className="h-full max-h-96 overflow-y-auto">
           <LeadTable leadRows={leadRows} />
         </CardContent>
       </Card>
