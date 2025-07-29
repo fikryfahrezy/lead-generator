@@ -93,6 +93,25 @@ export async function getLeadByKeyword(
   });
 }
 
+export type GetLeadByIdIn = {
+  id: number;
+};
+
+export async function getLeadById(
+  input: GetLeadByIdIn,
+): Promise<OperationResult<Lead | null>> {
+  return await runQuery(async () => {
+    const lead = await prisma.lead.findFirst({
+      where: {
+        id: {
+          equals: input.id,
+        },
+      },
+    });
+    return lead;
+  });
+}
+
 export async function getAllLeads(): Promise<OperationResult<Lead[]>> {
   return await runQuery(async () => {
     const leads = await prisma.lead.findMany({

@@ -13,8 +13,9 @@ export default async function HomePage() {
   }
 
   const leadRows: LeadRow[] = leads.data.map((lead) => {
+    const stringLeadId = String(lead.id);
     return {
-      id: String(lead.id),
+      id: stringLeadId,
       keyword: lead.keyword,
       status: getLeadStatus(lead.status),
       email: lead.email,
@@ -22,7 +23,7 @@ export default async function HomePage() {
       phone: lead.phone,
       action: (
         <Button asChild variant="link" size="sm">
-          <Link href={lead.keyword}>Detail</Link>
+          <Link href={stringLeadId}>Detail</Link>
         </Button>
       ),
     };

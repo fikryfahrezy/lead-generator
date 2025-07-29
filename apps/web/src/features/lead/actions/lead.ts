@@ -41,5 +41,5 @@ export async function newLeadAction(
     };
   }
 
-  redirect(`/${newLead.data.keyword}`);
+  redirect(`/${newLead.data.id}`);
 }

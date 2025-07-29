@@ -2,17 +2,17 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { LeadRow, LeadTable } from "@/features/lead/components/lead-table";
 import { getLeadStatus } from "@/features/lead/lib/utils";
-import { getLeadByKeyword } from "@aksel/db";
+import { getLeadById } from "@aksel/db";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
 type LeadDetailPageProps = {
-  params: Promise<{ keyword: string }>;
+  params: Promise<{ id: string }>;
 };
 
 export default async function LeadDetailPage(props: LeadDetailPageProps) {
-  const { keyword } = await props.params;
-  const lead = await getLeadByKeyword({ keyword });
+  const { id } = await props.params;
+  const lead = await getLeadById({ id: Number(id) });
   if (!lead || !lead.data) {
     return notFound();
   }
