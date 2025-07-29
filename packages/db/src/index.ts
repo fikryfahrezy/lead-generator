@@ -95,7 +95,11 @@ export async function getLeadByKeyword(
 
 export async function getAllLeads(): Promise<OperationResult<Lead[]>> {
   return await runQuery(async () => {
-    const leads = await prisma.lead.findMany();
+    const leads = await prisma.lead.findMany({
+      orderBy: {
+        id: "desc",
+      },
+    });
     return leads;
   });
 }
