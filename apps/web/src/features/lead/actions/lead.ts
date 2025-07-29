@@ -28,7 +28,7 @@ export async function newLeadAction(
   }
 
   if (existingLead.data) {
-    return redirect(`/${existingLead.data.keyword}`);
+    return redirect(`/${existingLead.data.id}`);
   }
 
   const newLead = await createLead({
