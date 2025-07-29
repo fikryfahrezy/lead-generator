@@ -224,7 +224,6 @@ async function enrichLeadData({
     status = LEAD_PROCESS_STATUS.SUCCESS;
   } else if (emptyValues.length <= requiredFields.length) {
     status = LEAD_PROCESS_STATUS.PENDING;
-    note = emptyValues.join(", ");
   } else {
     status = LEAD_PROCESS_STATUS.FAILED;
     note = emptyValues.join(", ");
