@@ -36,7 +36,7 @@ export function AddLeadModal() {
           <DialogHeader>
             <DialogTitle>Enrich new Lead </DialogTitle>
             <DialogDescription>
-              Enrich lead for domain or company name.
+              Enrich lead for domain or company name
             </DialogDescription>
           </DialogHeader>
           <Input placeholder="Input here..." name="keyword" required />

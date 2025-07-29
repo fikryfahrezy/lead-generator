@@ -38,7 +38,7 @@ export function LeadTable({ leadRows }: LeadTableProps) {
           <TableHead className="w-1/12">Status</TableHead>
           <TableHead className="w-2/12">Email</TableHead>
           <TableHead className="w-2/12">Phone</TableHead>
-          <TableHead className="w-3/6">Adress</TableHead>
+          <TableHead className="w-3/6">Address</TableHead>
           <TableHead className="w-1/6"></TableHead>
         </TableRow>
       </TableHeader>
