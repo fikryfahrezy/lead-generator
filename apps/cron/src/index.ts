@@ -214,7 +214,7 @@ async function enrichLeadData({
 
   const emptyValues = requiredFields
     .filter((requiredField) => {
-      return requiredField.value === undefined;
+      return !!requiredField.value;
     })
     .map((requiredField) => {
       return requiredField.message;
