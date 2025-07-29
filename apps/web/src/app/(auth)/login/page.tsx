@@ -12,7 +12,7 @@ export default async function LoginPage() {
     <main className="w-full max-w-sm">
       <Card>
         <CardHeader>
-          <CardTitle>Login to your account</CardTitle>
+          <CardTitle>Login to use the app</CardTitle>
           <CardDescription>
             User your Google account to login. We don&apos;t store any data of
             your account.
