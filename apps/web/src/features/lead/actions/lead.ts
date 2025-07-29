@@ -12,7 +12,6 @@ export async function newLeadAction(
   _: NewLeadState,
   formData: FormData,
 ): Promise<NewLeadState> {
-  console.log("hihfsf");
   const createLeadIn: CreateLeadIn = {
     // The `.get` possible value is `File | string` or string
     // for now the `keyword` is to be expected as string.

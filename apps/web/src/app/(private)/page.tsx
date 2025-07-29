@@ -1,64 +1,43 @@
-"use client";
-
-import { newLeadAction, type NewLeadState } from "@/actions/lead";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Separator } from "@/components/ui/separator";
-import { useActionState } from "react";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { AddLeadModal } from "@/features/lead/components/add-lead-modal";
+import { LeadRow, LeadTable } from "@/features/lead/components/lead-table";
+import { getLeadStatus } from "@/features/lead/lib/utils";
+import { getAllLeads } from "@aksel/db";
+import Link from "next/link";
 
-const initialNewLeadState: NewLeadState = {
-  success: true,
-  message: "",
-};
+export default async function HomePage() {
+  const leads = await getAllLeads();
+  if (!leads.success) {
+    return <p className="text-destructive">Fail to get leads data.</p>;
+  }
 
-export default function HomePage() {
-  const [state, action, pending] = useActionState(
-    newLeadAction,
-    initialNewLeadState,
-  );
+  const leadRows: LeadRow[] = leads.data.map((lead) => {
+    return {
+      id: String(lead.id),
+      keyword: lead.keyword,
+      status: getLeadStatus(lead.status),
+      email: lead.email,
+      address: lead.address,
+      phone: lead.phone,
+      action: (
+        <Button asChild variant="link" size="sm">
+          <Link href={lead.keyword}>Detail</Link>
+        </Button>
+      ),
+    };
+  });
 
   return (
-    <main>
-      <Dialog>
-        <DialogTrigger asChild>
-          <Button variant="outline">Enrich new Lead</Button>
-        </DialogTrigger>
-        <DialogContent asChild className="sm:max-w-[425px]">
-          <form action={action}>
-            <DialogHeader>
-              <DialogTitle>Enrich new Lead </DialogTitle>
-              <DialogDescription>
-                Enrich lead for domain or company name.
-              </DialogDescription>
-            </DialogHeader>
-            <Input placeholder="Input here..." name="keyword" required />
-            {state.message && (
-              <p className="text-destructive">{state.message}</p>
-            )}
-            <Separator />
-            <DialogFooter>
-              <DialogClose asChild>
-                <Button type="button" variant="outline">
-                  Cancel
-                </Button>
-              </DialogClose>
-              <Button type="submit" disabled={pending}>
-                Continue
-              </Button>
-            </DialogFooter>
-          </form>
-        </DialogContent>
-      </Dialog>
+    <main className="w-full max-w-4xl">
+      <Card>
+        <CardHeader>
+          <AddLeadModal />
+        </CardHeader>
+        <CardContent>
+          <LeadTable leadRows={leadRows} />
+        </CardContent>
+      </Card>
     </main>
   );
 }

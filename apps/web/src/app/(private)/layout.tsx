@@ -14,7 +14,7 @@ export default async function PrivateLayout({
 
   return (
     <>
-      <nav className="fixed left-0 right-0 top-0 flex items-center justify-end border-b-2 p-6">
+      <nav className="fixed left-0 right-0 top-0 flex items-center justify-end border-b-2 bg-white p-6">
         <form method="GET" action="/api/logout">
           <Button variant="destructive">Sign out</Button>
         </form>

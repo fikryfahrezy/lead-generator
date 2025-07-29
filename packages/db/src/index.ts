@@ -36,7 +36,7 @@ export async function createLead(
     const newLead = await prisma.lead.create({
       data: {
         keyword: input.keyword,
-        status: LEAD_PROCESS_STATUS.pending,
+        status: LEAD_PROCESS_STATUS.processing,
       },
     });
 
@@ -71,6 +71,22 @@ export async function getLeadByKeyword(
     return {
       success: true,
       data: lead,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      data: null,
+    };
+  }
+}
+
+export async function getAllLeads(): Promise<OperationResult<Lead[]>> {
+  try {
+    const leads = await prisma.lead.findMany();
+
+    return {
+      success: true,
+      data: leads,
     };
   } catch (error) {
     return {
