@@ -34,11 +34,12 @@ export function LeadTable({ leadRows }: LeadTableProps) {
       <TableHeader>
         <TableRow>
           <TableHead>ID</TableHead>
-          <TableHead className="w-1/5">Keyword</TableHead>
-          <TableHead className="w-1/5">Status</TableHead>
-          <TableHead className="w-1/5">Email</TableHead>
-          <TableHead className="w-1/5">Phone</TableHead>
-          <TableHead className="w-1/5">Adress</TableHead>
+          <TableHead className="w-1/6">Keyword</TableHead>
+          <TableHead className="w-1/6">Status</TableHead>
+          <TableHead className="w-1/6">Email</TableHead>
+          <TableHead className="w-1/6">Phone</TableHead>
+          <TableHead className="w-1/6">Adress</TableHead>
+          <TableHead className="w-1/6"></TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -58,7 +59,7 @@ export function LeadTable({ leadRows }: LeadTableProps) {
               <TableCell>{leadRow.email || "N/A"}</TableCell>
               <TableCell>{leadRow.phone || "N/A"}</TableCell>
               <TableCell>{leadRow.address || "N/A"}</TableCell>
-              {leadRow.action && <TableCell>{leadRow.action}</TableCell>}
+              <TableCell>{leadRow.action}</TableCell>
             </TableRow>
           );
         })}
