@@ -1,4 +1,9 @@
 import { LEAD_PROCESS_STATUS, prisma, type Lead } from "./client";
+export {
+  LEAD_PROCESS_STATUS,
+  type Lead,
+  type LeadProcessStatus,
+} from "./client";
 
 export type OperationResult<TData> =
   | {
@@ -6,24 +11,11 @@ export type OperationResult<TData> =
       data: TData;
     }
   | {
+      // In real world app, maybe consider also return class that extends `Error` class
+      // to inform what error that actually happens
       success: false;
       data: null;
     };
-
-export async function leadCount(): Promise<OperationResult<number>> {
-  try {
-    const count = await prisma.lead.count();
-    return {
-      success: true,
-      data: count,
-    };
-  } catch (error) {
-    return {
-      success: false,
-      data: null,
-    };
-  }
-}
 
 export type CreateLeadIn = {
   keyword: string;
@@ -36,7 +28,7 @@ export async function createLead(
     const newLead = await prisma.lead.create({
       data: {
         keyword: input.keyword,
-        status: LEAD_PROCESS_STATUS.processing,
+        status: LEAD_PROCESS_STATUS.PROCESSING,
       },
     });
 
@@ -44,7 +36,7 @@ export async function createLead(
       success: true,
       data: newLead,
     };
-  } catch (error) {
+  } catch {
     return {
       success: false,
       data: null,
@@ -72,7 +64,7 @@ export async function getLeadByKeyword(
       success: true,
       data: lead,
     };
-  } catch (error) {
+  } catch {
     return {
       success: false,
       data: null,
@@ -88,7 +80,55 @@ export async function getAllLeads(): Promise<OperationResult<Lead[]>> {
       success: true,
       data: leads,
     };
-  } catch (error) {
+  } catch {
+    return {
+      success: false,
+      data: null,
+    };
+  }
+}
+
+export async function getAllUnfinishLeads(): Promise<OperationResult<Lead[]>> {
+  try {
+    const leads = await prisma.lead.findMany({
+      where: {
+        status: {
+          in: [LEAD_PROCESS_STATUS.PROCESSING, LEAD_PROCESS_STATUS.PENDING],
+        },
+      },
+    });
+
+    return {
+      success: true,
+      data: leads,
+    };
+  } catch {
+    return {
+      success: false,
+      data: null,
+    };
+  }
+}
+
+export type UpdateLeadIn = Lead;
+
+export async function updateLead({
+  id,
+  ...newLeadData
+}: UpdateLeadIn): Promise<OperationResult<Lead>> {
+  try {
+    const updatedLead = await prisma.lead.update({
+      data: newLeadData,
+      where: {
+        id,
+      },
+    });
+
+    return {
+      success: true,
+      data: updatedLead,
+    };
+  } catch {
     return {
       success: false,
       data: null,

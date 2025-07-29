@@ -29,7 +29,7 @@ export function AddLeadModal() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Enrich new Lead</Button>
+        <Button>Enrich new Lead</Button>
       </DialogTrigger>
       <DialogContent asChild className="sm:max-w-[425px]">
         <form action={action}>

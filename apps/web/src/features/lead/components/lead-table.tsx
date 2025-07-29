@@ -33,12 +33,12 @@ export function LeadTable({ leadRows }: LeadTableProps) {
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead>ID</TableHead>
-          <TableHead className="w-1/6">Keyword</TableHead>
-          <TableHead className="w-1/6">Status</TableHead>
-          <TableHead className="w-1/6">Email</TableHead>
-          <TableHead className="w-1/6">Phone</TableHead>
-          <TableHead className="w-1/6">Adress</TableHead>
+          <TableHead className="w-1/12">ID</TableHead>
+          <TableHead className="w-2/12">Keyword</TableHead>
+          <TableHead className="w-1/12">Status</TableHead>
+          <TableHead className="w-2/12">Email</TableHead>
+          <TableHead className="w-2/12">Phone</TableHead>
+          <TableHead className="w-3/6">Adress</TableHead>
           <TableHead className="w-1/6"></TableHead>
         </TableRow>
       </TableHeader>
@@ -46,9 +46,9 @@ export function LeadTable({ leadRows }: LeadTableProps) {
         {leadRows.map((leadRow) => {
           return (
             <TableRow key={leadRow.id}>
-              <TableCell>{leadRow.id}</TableCell>
-              <TableCell>{leadRow.keyword}</TableCell>
-              <TableCell>
+              <TableCell className="align-top">{leadRow.id}</TableCell>
+              <TableCell className="align-top">{leadRow.keyword}</TableCell>
+              <TableCell className="align-top">
                 <Badge
                   variant={statusBadgeColorMap[leadRow.status]}
                   className="capitalize"
@@ -56,10 +56,16 @@ export function LeadTable({ leadRows }: LeadTableProps) {
                   {leadRow.status}
                 </Badge>
               </TableCell>
-              <TableCell>{leadRow.email || "N/A"}</TableCell>
-              <TableCell>{leadRow.phone || "N/A"}</TableCell>
-              <TableCell>{leadRow.address || "N/A"}</TableCell>
-              <TableCell>{leadRow.action}</TableCell>
+              <TableCell className="align-top">
+                {leadRow.email || "N/A"}
+              </TableCell>
+              <TableCell className="align-top">
+                {leadRow.phone || "N/A"}
+              </TableCell>
+              <TableCell className="whitespace-break-spaces align-top">
+                {leadRow.address || "N/A"}
+              </TableCell>
+              <TableCell className="align-top">{leadRow.action}</TableCell>
             </TableRow>
           );
         })}

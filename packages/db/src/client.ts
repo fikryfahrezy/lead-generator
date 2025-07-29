@@ -4,13 +4,12 @@ export type { Lead } from "@prisma/client";
 
 export type LeadProcessStatus = "pending" | "processing" | "success" | "failed";
 
-export const LEAD_PROCESS_STATUS: Record<LeadProcessStatus, LeadProcessStatus> =
-  {
-    pending: "pending",
-    processing: "processing",
-    success: "success",
-    failed: "failed",
-  };
+export const LEAD_PROCESS_STATUS = {
+  PENDING: "pending",
+  PROCESSING: "processing",
+  SUCCESS: "success",
+  FAILED: "failed",
+} as const satisfies Record<string, LeadProcessStatus>;
 
 const globalForPrisma = globalThis as unknown as { prisma: PrismaClient };
 

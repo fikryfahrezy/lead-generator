@@ -10,7 +10,6 @@ const packageJson = JSON.parse(
 // Auto-detect internal packages (assuming they start with @aksel/)
 const internalPackages = Object.keys({
   ...packageJson.dependencies,
-  ...packageJson.devDependencies,
 }).filter((pkg) => pkg.startsWith("@aksel/"));
 
 export default defineConfig({
@@ -20,9 +19,13 @@ export default defineConfig({
   bundle: true,
   clean: true,
   sourcemap: true,
-
-  // Bundle all internal packages
-  noExternal: internalPackages,
-
   minify: process.env.NODE_ENV === "production",
+
+  // Bundle these packages
+  noExternal: [
+    ...internalPackages,
+    // Somehow this package resolving to the project root `node_modules`
+    // instead of to the local `node_modules`, so we include it to bundle
+    "dataforseo-client",
+  ],
 });
