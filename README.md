@@ -1,6 +1,6 @@
-# Akselerasi AI Take Home Test
+# Lead Generator
 
-https://akselerasi-ai.fahrezy.work
+https://leading.fahrezy.work
 
 ## Apps
 
