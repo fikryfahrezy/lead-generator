@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { AddLeadModal } from "@/features/lead/components/add-lead-modal";
 import { LeadRow, LeadTable } from "@/features/lead/components/lead-table";
 import { getLeadStatus } from "@/features/lead/lib/utils";
-import { getAllLeads } from "@aksel/db";
+import { getAllLeads } from "@proj/db";
 import Link from "next/link";
 
 export default async function HomePage() {

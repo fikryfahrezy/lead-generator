@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { LeadRow, LeadTable } from "@/features/lead/components/lead-table";
 import { getLeadStatus } from "@/features/lead/lib/utils";
-import { getLeadById } from "@aksel/db";
+import { getLeadById } from "@proj/db";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 

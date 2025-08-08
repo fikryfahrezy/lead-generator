@@ -1,6 +1,6 @@
 "use server";
 
-import { createLead, getLeadByKeyword } from "@aksel/db";
+import { createLead, getLeadByKeyword } from "@proj/db";
 import { redirect } from "next/navigation";
 
 export type NewLeadState = {

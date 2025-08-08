@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Akselerasi AI",
-  description: "Akselerasi AI - Fullstack Take Home Test",
+  title: "Lead Generator",
+  description: "Generate lead data from Google SERP",
 };
 
 export default function RootLayout({

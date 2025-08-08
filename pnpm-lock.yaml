@@ -46,7 +46,7 @@ importers:
 
   apps/cron:
     dependencies:
-      "@aksel/db":
+      "@proj/db":
         specifier: workspace:*
         version: link:../../packages/db
       "@prisma/client":
@@ -68,7 +68,7 @@ importers:
 
   apps/web:
     dependencies:
-      "@aksel/db":
+      "@proj/db":
         specifier: workspace:*
         version: link:../../packages/db
       "@prisma/client":

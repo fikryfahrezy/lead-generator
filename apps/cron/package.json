@@ -1,5 +1,5 @@
 {
-  "name": "@aksel/cron",
+  "name": "@proj/cron",
   "version": "0.0.1",
   "private": true,
   "type": "module",
@@ -11,7 +11,7 @@
     "ts:check": "tsc --noEmit"
   },
   "dependencies": {
-    "@aksel/db": "workspace:*",
+    "@proj/db": "workspace:*",
     "@prisma/client": "6.12.0",
     "cron": "4.3.2",
     "dataforseo-client": "2.0.4"

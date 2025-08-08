@@ -7,10 +7,10 @@ const packageJson = JSON.parse(
   readFileSync(join(__dirname, "package.json"), "utf-8"),
 );
 
-// Auto-detect internal packages (assuming they start with @aksel/)
+// Auto-detect internal packages (assuming they start with @proj/)
 const internalPackages = Object.keys({
   ...packageJson.dependencies,
-}).filter((pkg) => pkg.startsWith("@aksel/"));
+}).filter((pkg) => pkg.startsWith("@proj/"));
 
 export default defineConfig({
   entry: ["src/index.ts"],

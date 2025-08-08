@@ -1,5 +1,5 @@
 {
-  "name": "@aksel/web",
+  "name": "@proj/web",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -11,7 +11,7 @@
     "ts:check": "tsc --noEmit"
   },
   "dependencies": {
-    "@aksel/db": "workspace:*",
+    "@proj/db": "workspace:*",
     "@prisma/client": "6.12.0",
     "@radix-ui/react-dialog": "1.1.14",
     "@radix-ui/react-label": "2.1.7",

@@ -5,7 +5,7 @@ import {
   updateLead,
   type Lead,
   type LeadProcessStatus,
-} from "@aksel/db";
+} from "@proj/db";
 import { CronJob } from "cron";
 import * as dataForSeoClient from "dataforseo-client";
 
