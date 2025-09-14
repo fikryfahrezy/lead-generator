@@ -22,7 +22,7 @@
     "web:lint": "cd apps/web && npm run lint",
     "web:format": "cd apps/web && npm run format",
     "web:ts:check": "cd apps/web && npm run ts:check",
-    "prepare": "husky"
+    "prepare": "node -e \"if (process.env.NODE_ENV === 'production' || process.env.CI === 'true') process.exit(0); else process.exit(1);\" || husky"
   },
   "devDependencies": {
     "@eslint/eslintrc": "3.3.1",
