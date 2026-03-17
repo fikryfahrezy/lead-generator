@@ -14,6 +14,6 @@ COPY ./packages ./packages/
 RUN pnpm install --frozen-lockfile
 
 COPY ./packages/db ./packages/db/
-COPY ./scripts/wait-db.js ./wait-db.js
+COPY ./scripts/wait-db.cjs ./wait-db.cjs
 
-CMD ["sh", "-c", "node ./wait-db.js"]
+CMD ["sh", "-c", "node ./wait-db.cjs"]
