@@ -16,4 +16,4 @@ RUN pnpm install --frozen-lockfile
 COPY ./packages/db ./packages/db/
 COPY ./scripts/wait-db.cjs ./wait-db.cjs
 
-CMD ["sh", "-c", "node ./wait-db.cjs"]
+CMD ["sh", "-c", "node ./wait-db.cjs && npm run migrate:up"]
