@@ -14,4 +14,5 @@ COPY ./packages ./packages/
 RUN pnpm install --frozen-lockfile
 
 COPY ./packages/db ./packages/db/
-CMD ["npm", "run", "migrate:up"]
+
+CMD ["sh", "-c", "until node -e \"require('net').connect(5432, 'host.docker.internal').on('connect', () => process.exit(0)).on('error', () => process.exit(1))\"; do echo 'Waiting for DB...'; sleep 2; done && npm run migrate:up"]
