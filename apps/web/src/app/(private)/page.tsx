@@ -6,6 +6,8 @@ import { getLeadStatus } from "@/features/lead/lib/utils";
 import { getAllLeads } from "@proj/db";
 import Link from "next/link";
 
+export const dynamic = "force-dynamic";
+
 export default async function HomePage() {
   const leads = await getAllLeads();
   if (!leads.success) {
